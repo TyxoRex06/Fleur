@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Fleur</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: white;
+    }
+
+    #fleur {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 100px auto;
+    }
+
+    .petale {
+      width: 60px;
+      height: 60px;
+      background-color: red;
+      border-radius: 50%;
+      position: absolute;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    .coeur {
+      width: 40px;
+      height: 40px;
+      background-color: yellow;
+      border-radius: 50%;
+      position: absolute;
+      top: 80px;
+      left: 80px;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+  </style>
+</head>
+<body>
+
+<div id="fleur"></div>
+
+<script>
+  const positions = [
+    {top: 0, left: 70},
+    {top: 20, left: 120},
+    {top: 70, left: 140},
+    {top: 120, left: 120},
+    {top: 140, left: 70},
+    {top: 120, left: 20},
+    {top: 70, left: 0},
+    {top: 20, left: 20}
+  ];
+
+  function genererFleur() {
+    const fleur = document.getElementById("fleur");
+
+    positions.forEach((pos, index) => {
+      const petale = document.createElement("div");
+      petale.className = "petale";
+      petale.style.top = pos.top + "px";
+      petale.style.left = pos.left + "px";
+      fleur.appendChild(petale);
+
+      setTimeout(() => {
+        petale.style.opacity = 1;
+      }, index * 300);
+    });
+
+    setTimeout(() => {
+      const coeur = document.createElement("div");
+      coeur.className = "coeur";
+      fleur.appendChild(coeur);
+      setTimeout(() => {
+        coeur.style.opacity = 1;
+      }, 100);
+    }, positions.length * 300);
+  }
+
+  window.onload = genererFleur;
+</script>
+
+</body>
+</html>
